@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+ 
+  <title>Frontend Mentor | Interactive comments section</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+  @media screen and (min-width: 601px) {
+  div.example {
+    font-size: 20px;
+  }
+  img #img1{
+    width:100px;
+  }
+  input{ margin:3px  0 0;
+  padding: 20px;
+    width:500px;
+    height: 150px;
+    border: 2px solid black;
+    overflow: auto;
+  }
+}
+@media screen and (max-width: 600px) {
+  div.example {
+    font-size: 14px;
+  }
+  div.tyu{ display:block;}
+  input{
+    margin: 90px 0 10px 0;
+    width:200px;
+    height: 100px;
+  }
+ 
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.9);
+  padding-top: 50px;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+    body {
+    color:   hsl(212, 24%, 26%);
+  background-color: rgb(232,233,249);
+
+  }
+  button{
+  border-style: none;  color:hsl(212, 24%, 26%);}
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="w3,css">
+  <link rel="stylesheet" href="w3.css">
+  <script src="data.js"></script>
+  <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <div class="example">
+    <div id="id01" class="modal" style="display:none;">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-content" action="https://www.w3schools.com/action_page.php">
+    <div class="container" style="width:auto; padding:25px;">
+      <h1>Delete Comment</h1>
+      <p>Are you sure you want to delete this comment? this will remove the comment and can't be undone </p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button id="demo" style="" type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+      </div>
+    </div>
+  </form>
+</div>
+    <div class="w3-row">
+      <div style="background-color: white;  overflow: auto; margin:20px 22px 25px 22px;
+       border-radius: 8px; height: 221px;" >
+ 
+        <div class="w3-col w3-hide-small w3-container" style="width:100px; padding :20px 0 0 30px;margin: 15px 0 0 20px;">
+        <div style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; background-color: hsl(223, 19%, 93%);
+        margin: 10px; padding: 30px 2px 2px 2px; width: 55px; ;">
+        <button id="plus" class="w3-button" id="add" style="margin-left:15px;">+</button>
+        <br>
+        <span class="w3-padding-top-32" id="numberPlace" style="margin:14px; color: hsl(238, 57%, 45%);">0</span>
+        <br>
+        <button class="w3-button" id="minus" style="margin-left:4px ;">-</button>
+        </div>
+      </div>
+      <div class="w3-rest w3-container ">
+       <div class="w3-bar">
+<img id="img1" style="margin:10px 0 0 0;" class="w3-left" src="image-amyrobson.png" alt="" width="13%">
+<h5 class="w3-bar-item"><b>amyrobson</b></h5>
+<p class="w3-bar-item">1 month ago</p>
+<h5 id="rep" class="w3-right w3-ripple w3-hide-small" onclick="myFun()" style="margin:9px; color: hsl(238, 57%, 45%);"><b>Reply</b></h5>
+<img class="w3-right w3-bar-item w3-hide-small" src="icon-reply.svg" style="padding:16px 0 0 0;"alt="" width ="10%"/>
+
+</div>
+<p id="re" style="displays:block;">Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.</p>
+<div class="w3-row">
+<div class="w3-col w3-hide-large w3-bar-item w3-hide-medium" style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; color: hsl(238, 57%, 45%); background-color: hsl(223, 19%, 93%); width:20%; height:15%;" >
+  <button id="plus" type="">+</button>
+  <span id="numberPlace">0</span>
+  <button id="minus" type="submit">-</button>
+</div>
+<div class="w3-rest w3-right">
+ <h7 class="w3-right w3-hide-large w3-hide-medium" style="color: hsl(238, 57%, 45%);"><b>Reply</b></h7>
+<img class="w3-right w3-hide-large w3-hide-medium" src="icon-reply.svg" style="padding:5px 2px 0 0;"alt="" width ="25%"/> 
+</div>
+       </div>
+      </div>
+    </div>
+    <div class="tyu" id="tyuu" style=" display:none; background-color: white; text-align:center;
+ overflow: auto; margin: 0 22px 30px 20px;
+       border-radius: 8px; height: 240px;">
+      <div style="visibility:hidden;">
+       <p class="w3-small">hebebeb</p>
+      </div>
+    <form action="insertcomment.php" method="post"> <!-- Here the shit they must fill out -->
+    
+  
+    <textarea class="w3-bar-item w3-round-xlarge" style="border-color:#5357B6;" id="w3review" name="w3review" rows="4" cols="40">
+    </textarea>
+    <img id="img1" class="w3-left" src="image-juliusomo.png" alt="" style="margin:1px 1px 0 2px;" width="10%" />
+    <button id="exampl" class="w3-bar-item w3-right w3-xxlarge" type="submit" style="padding:2px; margin:4px; background-color:#5357B6; color:white;">Reply</button>
+    </form>
+    </div>
+  </div>
+  
+ <div class="w3-row">
+      <div style="background-color: white;  overflow: auto; margin: 0 22px 50px 22px;
+       border-radius: 8px; height: 240px;" >
+ 
+        <div class="w3-col w3-hide-small w3-container" style="width:100px; padding :20px 0 0 30px;margin: 15px 0 0 20px;">
+        <div style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; background-color: hsl(223, 19%, 93%);
+        margin: 10px; padding: 30px 2px 2px 2px; width: 55px; ;">
+        <button id="plus"><b>+</b></button>
+        <br>
+        <span class="w3-padding-top-32" id="numberPlace" style="margin:9px; color: hsl(238, 57%, 45%);">0</span>
+        <br>
+        <button id="minus" style="margin-left:4px ;"><b>-</b></button>
+        </div>
+      </div>
+      <div class="w3-rest w3-container ">
+       <div class="w3-bar">
+<img id="img1" style="margin:10px 0 0 0;" class="w3-left" src="image-maxblagun.png" alt="" width="13%">
+<h5 class="w3-bar-item"><b>maxblagun</b></h5>
+<p class="w3-bar-item">2 weeks ago</p>
+<h5 id="repl" class="w3-right w3-ripple w3-hide-small" onclick="myFun()" style="margin:9px; color: hsl(238, 57%, 45%);"><b>Reply</b></h5>
+<img class="w3-right w3-bar-item w3-hide-small" src="icon-reply.svg" style="padding:16px 0 0 0;"alt="" width ="10%"/>
+
+</div>
+<p id="re">Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!</p>
+<div class="w3-row">
+<div class="w3-col w3-hide-large w3-bar-item w3-hide-medium" style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; color: hsl(238, 57%, 45%); background-color: hsl(223, 19%, 93%); width:20%; height:15%;" >
+  <button id="plus" type="">+</button>
+  <span id="numberPlace">0</span>
+  <button id="minus" type="submit">-</button>
+</div>
+<div class="w3-rest w3-right">
+ <h7 class="w3-right w3-hide-large w3-hide-medium" style="color: hsl(238, 57%, 45%);"><b>Reply</b></h7>
+<img class="w3-right w3-hide-large w3-hide-medium" src="icon-reply.svg" style="padding:5px 2px 0 0;"alt="" width ="25%"/> 
+</div>
+       </div>
+      </div>
+    </div>
+    <div class="tyu" id="tyu" style=" display:none; background-color: white; text-align:center;
+ overflow: auto; margin: 0 22px 30px 20px;
+       border-radius: 8px; height: 240px;">
+      <div style="visibility:hidden;">
+       <p class="w3-small">hebebeb</p>
+      </div>
+    <form action="insertcomment.php" method="post"> <!-- Here the shit they must fill out -->
+    
+  
+    <textarea class="w3-bar-item w3-round-xlarge" style="border-color:#5357B6;" id="w3review" name="w3review" rows="4" cols="40">
+    </textarea>
+    <img id="img1" class="w3-left" src="image-juliusomo.png" alt="" style="margin:1px 1px 0 2px;" width="10%" />
+    <button id="exampl" class="w3-bar-item w3-right w3-xxlarge" type="submit" style="padding:2px; margin:4px; background-color:#5357B6; color:white;">Reply</button>
+    </form>
+    </div>
+  </div>
+  
+  <div style="border-left: 2px solid grey; margin:3px 0px 20px 34px">
+     <div class="w3-row">
+ <div style="background-color: white;
+ overflow: auto; margin: 0 22px 50px 20px;
+       border-radius: 8px; height: 240px;" >
+   <div class="w3-col w3-hide-small w3-container" style="width:100px; padding :20px 0 0 30px;margin: 15px 0 0 20px;">
+        <div style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; background-color: hsl(223, 19%, 93%);
+        margin: 10px; padding: 30px 2px 2px 2px; width: 55px; ;">
+        <button id="plus"><b>+</b></button>
+        <br>
+        <span class="w3-padding-top-32" id="numberPlace" style="margin:9px; color: hsl(238, 57%, 45%);">0</span>
+        <br>
+        <button id="minus" style="margin-left:4px ;"><b>-</b></button>
+        </div>
+      </div>
+      <div class="w3-rest w3-container ">
+       <div class="w3-bar">
+<img id="img1" style="margin:10px 0 0 0;" class="w3-left" src="image-ramsesmiron.png" alt="" width="13%">
+<h6 id="1" class="w3-bar-item" ><b>ramsesmiron</b></h6>
+<p id="1" class="w3-bar-item">1 week ago</p>
+<h5 id="reply" onclick="myFun()" class="w3-right w3-ripple w3-ripple w3-hide-small" style="margin:9px; color: hsl(238, 57%, 45%);"><b>Reply</b></h5>
+<img id="reply" onclick="myFun()" class="w3-right w3-button w3-ripple w3-bar-item w3-hide-small" src="icon-reply.svg" style="padding:16px 0 0 0;"alt="" width ="10%"/>
+
+</div>
+<p id="re"><span style="color:#5357B6;"><b>@maxblagun</b></span> If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.</p>
+<div class="w3-row">
+<div class="w3-col w3-hide-large w3-bar-item w3-hide-medium" style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; color: hsl(238, 57%, 45%); background-color: hsl(223, 19%, 93%); width:20%; height:15%;" >
+  <button id="plus" type="">+</button>
+  <span id="numberPlace">0</span>
+  <button id="minus" type="submit">-</button>
+</div>
+<div class="w3-rest w3-right">
+ <h7 class="w3-right w3-hide-large w3-hide-medium" style="color: hsl(238, 57%, 45%);"><b>Reply</b></h7>
+<img class="w3-right w3-hide-large w3-hide-medium" src="icon-reply.svg" style="padding:5px 2px 0 0;"alt="" width ="25%"/> 
+</div>
+       </div>
+       
+      </div>
+    </div>
+    <div class="tyu" id="ty" style=" display:none; background-color: white; text-align:center;
+ overflow: auto; margin: 0 22px 30px 20px;
+       border-radius: 8px; height: 240px;">
+      <div style="visibility:hidden;">
+       <p class="w3-small">hebebeb</p>
+      </div>
+    <form action="insertcomment.php" method="post"> <!-- Here the shit they must fill out -->
+    
+  
+    <textarea class="w3-bar-item w3-round-xlarge" style="border-color:#5357B6;" id="w3review" name="w3review" rows="4" cols="40">
+    </textarea>
+    <img id="img1" class="w3-left" src="image-juliusomo.png" alt="" style="margin:1px 1px 0 2px;" width="10%" />
+    <button id="exampl" class="w3-bar-item w3-right w3-xxlarge" type="submit" style="padding:2px; margin:4px; background-color:#5357B6; color:white;">Reply</button>
+    </form>
+    </div>
+         <div id="remove" class="w3-row">
+ <div style="background-color: white;
+ overflow: auto; margin: 0 22px 20px 20px;
+       border-radius: 8px; height: 240px;" >
+   <div class="w3-col w3-hide-small w3-container" style="width:100px; padding :20px 0 0 30px;margin: 15px 0 0 20px;">
+        <div style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; background-color: hsl(223, 19%, 93%);
+        margin: 10px; padding: 30px 2px 2px 2px; width: 55px; ;">
+        <button id="plus"><b>+</b></button>
+        <br>
+        <span class="w3-padding-top-32" id="numberPlace" style="margin:9px; color: hsl(238, 57%, 45%);">0</span>
+        <br>
+        <button id="minus" style="margin-left:4px ;"><b>-</b></button>
+        </div>
+      </div>
+      
+      <div class="w3-rest w3-container ">
+       <div class="w3-bar">
+<img id="img1" class="w3-left" style="margin:12px 0 0 0;" src="image-juliusomo.png" alt="" width="13%">
+<h5 class="w3-bar-item"><b>juliusomo</b></h5>
+<p class="w3-bar-item w3-small" style="background-color:#5357B6; color:white;"><b>you</b></p>
+<p class="w3-bar-item">2 days ago</p>
+ <h7 onclick="document.getElementById('id01').style.display='block'" class="w3-right w3-ripple w3-hide-small" style="color: hsl(358, 79%, 66%); padding:10px 5px 0 2px;"><b>Delete</b></h7>
+<img class="w3-right w3-ripple w3-hide-small" src="icon-delete.svg" style="padding:15px 1px 0 2px;"alt="" width ="2%"/> 
+<h5 onclick="document.getElementById('id01').style.display='block'" class="w3-right w3-ripple w3-hide-small" style="margin:9px; color: hsl(238, 57%, 45%);"><b>Edit</b></h5>
+<img class="w3-right w3-ripple w3-bar-item w3-hide-small" src="icon-edit.svg" style="padding:16px 0 0 0;"alt="" width ="10%"/>
+
+</div>
+<p id="re"><b style="color:#5357B6">@ramsesmiron</b> I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.</p>
+<div class="w3-row">
+<div class="w3-col w3-hide-large w3-bar-item w3-hide-medium" style="border: solid 1px hsl(228, 33%, 97%); border-radius: 15px; color: hsl(238, 57%, 45%); background-color: hsl(223, 19%, 93%); width:20%; height:15%;" >
+  <button type="">+</button>
+  <span>0</span>
+  <button type="submit">-</button>
+</div>
+<div class="w3-rest w3-right">
+ 
+ <h7 class="w3-right w3-ripple w3-hide-large w3-hide-medium" style="color: hsl(238, 57%, 45%);"><b>Edit</b></h7>
+<img class="w3-right w3-ripple w3-hide-large w3-hide-medium" src="icon-edit.svg" style="padding:5px 2px 0 0;"alt="" width ="14%"/> 
+ <h7 onclick="document.getElementById('id01').style.display='block'" class="w3-right w3-ripple w3-hide-large w3-hide-medium" style="color: hsl(358, 79%, 66%); padding:0 5px 0 2px;"><b>Delete</b></h7>
+<img class="w3-right w3-ripple w3-hide-large w3-hide-medium" src="icon-delete.svg" style="padding:5px 1px 0 2px;"alt="" width ="14%"/> 
+</div>
+       </div>
+      </div>
+    </div>
+   </div>
+   </div>
+</div>
+       <div class="tyu" id="ty" style=" background-color: white; text-align:center;
+ overflow: auto; margin: 0 22px 30px 20px;
+       border-radius: 8px; height: 240px;">
+      <div style="visibility:hidden;">
+       <p class="w3-small">hebebeb</p>
+      </div>
+    <form action="insertcomment.php" method="post"> <!-- Here the shit they must fill out -->
+      <img id="img1" class="w3-left" src="image-juliusomo.png" alt="" style="visibility:hidden; margin:1px 1px 0 2px;" width="10%" />
+  
+    <textarea class="w3-bar-item w3-round-xlarge" style="border-color:#5357B6;" id="w3review" name="w3review" rows="4" cols="40">
+    </textarea>
+    <img id="img1" class="w3-left" src="image-juliusomo.png" alt="" style="margin:1px 1px 0 1px;" width="10%" />
+    <button id="exampl" class="w3-ripple w3-xxlarge w3-bar-item w3-right w3-wide" type="submit" style="padding:2px; margin:4px; background-color:#5357B6; color:white;">send</button>
+    </form>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Pull dynamic content from the data.json file -->
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  
+  <script type="text/javascript" charset="utf-8">
+function myFunn(){ 
+  document.getElementById("remove").style.display="none"
+}
+
+
+
+  // Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+ $(document).ready(function(){
+      $("#demo").click(function(){
+        $("#remove").hide()
+      });
+    });
+    $(document).ready(function(){
+      $("#reply").click(function(){
+        $("#ty").toggle()
+      });
+    });
+     $(document).ready(function(){
+      $("#repl").click(function(){
+        $("#tyu").toggle()
+      });
+    });
+     $(document).ready(function(){
+      $("#rep").click(function(){
+        $("#tyuu").toggle()
+      });
+    });
+          window.onload=function(){
+    var minusBtn = document.getElementById("minus"),
+        plusBtn = document.getElementById("plus"),
+        numberPlace = document.getElementById("numberPlace"),
+        submitBtn = document.getElementById("submit"),
+        number = 0, /// number value
+        min = 0, /// min number
+        max = 30; /// max number
+        
+    minusBtn.onclick = function(){
+        if (number>min){
+           number = number-1; /// Minus 1 of the number
+           numberPlace.innerText = number ; /// Display the value in place of the number
+           
+        }
+        if(number == min) {        
+            numberPlace.style.color= "red";
+            setTimeout(function(){numberPlace.style.color= "black"},500)
+        }
+        else {
+          numberPlace.style.color="black";            
+           }
+                
+    }
+    plusBtn.onclick = function(){
+        if(number<max){
+           number = number+1;
+           numberPlace.innerText = number ; /// Display the value in place of the number
+        }     
+        if(number == max){
+               numberPlace.style.color= "red";
+               setTimeout(function(){numberPlace.style.color= "black"},500)
+        }
+           
+        else {
+               numberPlace.style.color= "black";
+               
+        }
+     
+           
+    }
+    submitBtn.onclick = function(){
+       alert("you choice : " + number);
+    }
+    
+}
+  </script>
+</body>
+</html>
